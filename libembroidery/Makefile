@@ -1,4 +1,4 @@
-CC = clang
+CC = gcc
 CFLAGS = -fPIC -fcommon
 objects := $(patsubst %.c,%.o,$(wildcard *.c))
 

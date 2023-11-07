@@ -2,6 +2,6 @@
 
 void rect(Turtle& t, float width, float height);
 void meetTurtle();
-void plotExampleData();
-void plotStudentData();
+void myFirstEmbroidery()
+
 

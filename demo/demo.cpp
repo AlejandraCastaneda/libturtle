@@ -28,6 +28,17 @@ void meetTurtle() {
   t.save("demo.dst");
 }
 
+void myFirstEmbroidery(){
+  Turtle ted;
+  ted.satinon(0.5);
+  ted.pendown();
+  ted.displayMessage("Alejandra Castaneda", 5);
+  ted.penup();
+  ted.end();
+  ted.save("myFirstEmbroidery.dst");
+}
+
 int main() {
-    meetTurtle();
+  meetTurtle();
+  return 0;
 }

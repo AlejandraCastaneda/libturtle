@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = g++
 CXXFLAGS = -g -Os -std=c++17 -I../libembroidery/ -Wall -Wextra -pedantic
 targets := $(patsubst %.cpp,lib%.a,$(wildcard *.cpp))
 
