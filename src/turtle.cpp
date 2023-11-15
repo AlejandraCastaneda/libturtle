@@ -220,28 +220,35 @@ bool notInAlphabet(char c) {
     return Alphabet.find(c) == Alphabet.end() && c != '*';
 }
 
+/**
+ * Will display a message of text. Can display all letters in alphabet, commas, periods, and 
+ * an asterisk will create a new line of text (left aligned - no spaces needed)  
+*/
 void Turtle::displayMessage(string message, float scale, float line_space) {
     transform(message.begin(), message.end(), message.begin(), ::toupper);
     message.erase(remove_if(message.begin(), message.end(), notInAlphabet),
                   message.end());
 
     bool pen_was_down = pen_is_down_;
-    float start_y = position_.y_ + 100;
+    float start_y = position_.y_ + 100;  // adjusts starting point of text to handle many lines of text
     float max_x = position_.x_;
 
     float left_y = position_.y_ + 100;
     float left_x = position_.x_;
 
     penup();
-    gotopoint(max_x, start_y);
+    gotopoint(max_x, start_y); // moves to start
 
     for (char& nextChar : message) {
         penup();
+
+        // new line character moves start position 
         if(nextChar == '*'){
             gotopoint(left_x, left_y - (5 * scale) - line_space);
             start_y = position_.y_;
             max_x = position_.x_;
 
+        // all other characters begin where the last character left off
         } else {
             for (const Point& p : Alphabet[nextChar]) {
                 move(p * scale);
@@ -373,10 +380,14 @@ void Turtle::check_density(const Point& pos) {
     density_error_ |= (entry->second > DENSITY_ERROR_LIMIT);
 }
 
+/**
+ * Creates a spiral from center outward based on the size and direction given 
+*/
 void Turtle::spiral(std::string direction = "right", int size = 50) {
     for(int i = 0; i < size; i++){
 
-        forward(2 + i / 4);
+        forward(2 + i / 4); // step size 
+
         if (direction == "right" || direction == "r") {
             right(15);
         } else if (direction == "left" || direction == "l"){
