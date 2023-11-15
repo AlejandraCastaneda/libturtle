@@ -30,15 +30,30 @@ void meetTurtle() {
 
 void myFirstEmbroidery(){
   Turtle ted;
-  ted.satinon(0.5);
+  ted.satinon(0.3);
+  ted.setStepSize(2);
+  ted.gotopoint(0, 20);
   ted.pendown();
-  ted.displayMessage("Alejandra Castaneda", 5);
+  ted.displayMessage("Alejandra*Castaneda", 2, 5);
   ted.penup();
   ted.end();
-  ted.save("myFirstEmbroidery.dst");
+  ted.save("myfirst.dst");
+}
+
+void mySecondEmbroidery(){
+  Turtle tye;
+  tye.satinon(0.3);
+  tye.gotopoint(20, 20);
+  tye.pendown();
+  tye.spiral("left", 50);
+  tye.penup();
+  tye.end();
+  tye.save("mysecond.dst");
 }
 
 int main() {
-  meetTurtle();
+  myFirstEmbroidery();
+  //mySecondEmbroidery();
+
   return 0;
 }

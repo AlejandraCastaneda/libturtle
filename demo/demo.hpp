@@ -2,6 +2,7 @@
 
 void rect(Turtle& t, float width, float height);
 void meetTurtle();
-void myFirstEmbroidery()
+void myFirstEmbroidery();
+void mySecondEmbroidery();
 
 

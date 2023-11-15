@@ -5,11 +5,15 @@
 #include "emb-pattern.h"
 #include "point.hpp"
 #include <map>
+#include <string>
 
 class Turtle {
  public:
     Turtle();
     ~Turtle();
+
+   // my contributions
+   void spiral(std::string direction, int size);
 
     void setStepSize(float step);
     void satinon(float delta);
@@ -33,7 +37,7 @@ class Turtle {
     void forward(const float dist);
     void backward(const float dist);
 
-    void displayMessage(std::string message, float scale);
+    void displayMessage(std::string message, float scale, float line_space);
 
     void save(std::string fname);
     void end();

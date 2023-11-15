@@ -131,5 +131,6 @@ std::unordered_map<char, std::vector<Point>> Alphabet = {
     {'.',
      {Point(0, 0), Point(0, .75), Point(.75, 0), Point(0, -.75),
       Point(-.75, 0)}},
-    {' ', {Point(3.5, 0)}}};
+    {' ', {Point(3.5, 0)}},
+    {'*', {Point(0, 0)}}};
 #endif

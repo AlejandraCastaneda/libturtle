@@ -217,28 +217,41 @@ void Turtle::backward(const float dist) {
  */
 
 bool notInAlphabet(char c) {
-    return Alphabet.find(c) == Alphabet.end();
+    return Alphabet.find(c) == Alphabet.end() && c != '*';
 }
 
-void Turtle::displayMessage(string message, float scale) {
+void Turtle::displayMessage(string message, float scale, float line_space) {
     transform(message.begin(), message.end(), message.begin(), ::toupper);
     message.erase(remove_if(message.begin(), message.end(), notInAlphabet),
                   message.end());
 
     bool pen_was_down = pen_is_down_;
-    float start_y = position_.y_;
+    float start_y = position_.y_ + 100;
     float max_x = position_.x_;
+
+    float left_y = position_.y_ + 100;
+    float left_x = position_.x_;
+
+    penup();
+    gotopoint(max_x, start_y);
 
     for (char& nextChar : message) {
         penup();
-        for (const Point& p : Alphabet[nextChar]) {
-            move(p * scale);
-            if (position_.x_ > max_x)
-                max_x = position_.x_;
-            pen_is_down_ = pen_was_down;
+        if(nextChar == '*'){
+            gotopoint(left_x, left_y - (5 * scale) - line_space);
+            start_y = position_.y_;
+            max_x = position_.x_;
+
+        } else {
+            for (const Point& p : Alphabet[nextChar]) {
+                move(p * scale);
+                if (position_.x_ > max_x)
+                    max_x = position_.x_;
+                pen_is_down_ = pen_was_down;
+            }
+            penup();  // raise pen to jump to next letter
+            gotopoint(max_x + 3 * scale, start_y);
         }
-        penup();  // raise pen to jump to next letter
-        gotopoint(max_x + 3 * scale, start_y);
         pen_is_down_ = pen_was_down;
     }
 }
@@ -358,6 +371,21 @@ void Turtle::check_density(const Point& pos) {
     }
     density_warning_ |= (entry->second > DENSITY_WARN_LIMIT);
     density_error_ |= (entry->second > DENSITY_ERROR_LIMIT);
+}
+
+void Turtle::spiral(std::string direction = "right", int size = 50) {
+    for(int i = 0; i < size; i++){
+
+        forward(2 + i / 4);
+        if (direction == "right" || direction == "r") {
+            right(15);
+        } else if (direction == "left" || direction == "l"){
+            left(15);
+        } else {
+            cerr << "Input a direction: 'left' / 'l' or 'right' / 'r'"
+             << endl;
+        }
+    }
 }
 
 /* Disabled functions -- we could use these at some point, but they feel too
